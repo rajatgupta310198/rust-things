@@ -5,6 +5,25 @@ struct User {
     username: String,
     sign_in_count: u64,
 }
+
+#[derive(Debug)]
+struct Coordinates2d(i32, i32);
+
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+
+    fn is_width(&self) -> bool {
+        self.width > 0
+    }
+}
+
 fn main() {
     println!("Hello, world!");
 
@@ -46,6 +65,22 @@ fn main() {
     for i in 0..size {
         println!("{}", a[i])
     }
+
+    let mut x_y = Coordinates2d(5, 10);
+    dbg!(x_y);
+    let mut a: i32 = 10;
+    println!("{}", f32::sqrt(a as f32));
+
+    println!("{}", a.abs());
+    println!("{}", a.pow(2));
+
+    let rect1 = Rectangle {
+        width: 10,
+        height: 20,
+    };
+
+    println!("Rectangle area {}", rect1.area());
+    println!("Rectangle Width {}", rect1.is_width());
 }
 fn build_user(name: String, email: String, username: String) -> User {
     User {
