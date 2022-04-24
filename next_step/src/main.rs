@@ -24,6 +24,42 @@ impl Rectangle {
     }
 }
 
+#[derive(Debug)]
+enum IpAddrKind {
+    V4,
+    V6,
+}
+
+#[derive(Debug)]
+struct IpAddress {
+    kind: IpAddrKind,
+    address: String,
+}
+
+enum IpAddrs {
+    V4(String),
+    V6(String),
+}
+
+#[derive(Debug)]
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+impl Message {
+    fn call(&self) {
+        dbg!(self);
+    }
+}
+
+enum Option<T> {
+    None,
+    Some(T),
+}
+
 fn main() {
     println!("Hello, world!");
 
@@ -81,6 +117,24 @@ fn main() {
 
     println!("Rectangle area {}", rect1.area());
     println!("Rectangle Width {}", rect1.is_width());
+
+    // ENUMS
+
+    let v4 = IpAddrKind::V4;
+    route(&v4);
+
+    let home_address = IpAddress {
+        kind: v4,
+        address: String::from("127.0.0.1"),
+    };
+
+    dbg!(home_address);
+
+    let home_addr = IpAddrs::V4(String::from("localhost"));
+
+    let m = Message::Write(String::from("Hey"));
+    m.call();
+    let op = Some(1);
 }
 fn build_user(name: String, email: String, username: String) -> User {
     User {
@@ -95,4 +149,15 @@ fn build_user(name: String, email: String, username: String) -> User {
 fn some_new() -> i32 {
     let y = 1; // stack
     y
+}
+
+fn route(ip_kind: &IpAddrKind) {
+    match ip_kind {
+        IpAddrKind::V4 => {
+            println!("v4");
+        }
+        IpAddrKind::V6 => {
+            println!("v6");
+        }
+    }
 }
