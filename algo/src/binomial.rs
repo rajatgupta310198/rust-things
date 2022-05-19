@@ -18,3 +18,16 @@ pub fn catalan(n: u64) -> u64 {
 
     res / (n + 1)
 }
+
+pub fn catalan_dp(n: usize) -> i32 {
+    let mut catalans = vec![0; n + 1];
+    catalans[0] = 1;
+    catalans[1] = 1;
+    for i in 2..n + 1 {
+        for j in 0..i {
+            catalans[i] = catalans[i] + catalans[i - j - 1] * catalans[j]
+        }
+    }
+
+    catalans[n]
+}
